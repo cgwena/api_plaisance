@@ -8,4 +8,4 @@ const reservationSchema = mongoose.Schema({
     checkOut: { type: Date, required: true }
 })
 
-module.exports = mongoose.model('Reservation', reservationSchema)
+module.exports = mongoose.model('Reservations', reservationSchema)

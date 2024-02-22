@@ -1,16 +1,17 @@
-const Catway = require('../models/catways.js')
+const Catway = require('../models/catways')
 
-exports.createCatway = async (req, req, next) => {
+exports.createCatway = async (req, res, next) => {
     try {
-        const catwayObject = JSON.parse(req.body.thing)
+        const catwayObject = req.body.catway
         delete catwayObject._id
         delete catwayObject._userId
         const catway = new Catway({
-            ...catwayObject,
-            userId: req.auth.userId,
+            catwayNumber: req.body.catwayNumber,
+            type: req.body.type,
+            catwayState: req.body.catwayState,
         })
         await catway.save()
-        res.status(201).json({ message: 'Catway enregistré !' });
+        res.status(201).redirect('/catways');
     } catch (error) {
         res.status(400).json({ error })
     }
@@ -22,7 +23,7 @@ exports.getOneCatway = async (req, res, next) => {
         if (!catway) {
             return res.status(400).json({ message: 'Catway non trouvé' })
         }
-        res.status(200).json({ catway })
+        res.status(200).render('catway_detail', {catway : catway})
         
     } catch (error) {
         res.status(400).json({ error })
@@ -32,15 +33,25 @@ exports.getOneCatway = async (req, res, next) => {
 exports.getAllCatways = async (req, res, next) => {
     try {
         const catways = await Catway.find()
-        res.status(200).json(catways)
+        res.status(200).render('catways', { catways: catways })
     } catch (error) {
         res.status(400).json({ error })
     }
 };
 
-exports.updateCatway = async (req, res, next) => {
+exports.updateCatway = async (req, res, next) => {     
     try {
-        await Catway.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
+        await Catway.updateOne({ _id: req.params.id }, {
+            _id: req.params.id,
+            catwayNumber: req.body.catwayNumber,
+            type: req.body.type,
+            catwayState: req.body.catwayState,
+            
+        })
+        return res.status(200).json('Catway modifié')
+            //redirect('/catways', { catway: catway })
+        
+        //res.status(404).json('catway not found')
     } catch (error) {
         res.status(400).json({ error })
     }

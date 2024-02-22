@@ -1,0 +1,12 @@
+include layout
+
+h2 Catway numéro #{reservation.catwayNumber}
+p Nom du client : #{reservation.clientName}
+p Nom du bateau : #{reservation.boatName}
+p Date d'arrivée : #{reservation.checkIn}
+p Date de départ : #{reservation.checkOut}
+
+form(action='/reservations/#{reservation._id}', method='POST')
+  input(type='hidden', name='_method', value='DELETE')
+  button(type='submit', onclick='return confirm("Êtes-vous sûr de vouloir supprimer cette réservation ?")') Supprimer
+

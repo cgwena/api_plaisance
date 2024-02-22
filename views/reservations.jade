@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  
+  h3 Voici la liste des réservations:
+  ul
+    each reservation in reservations
+          a(href='/catways/reservations/#{reservation._id}') Numéro #{reservation.catwayNumber}

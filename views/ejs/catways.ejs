@@ -1,0 +1,33 @@
+<%- include('layout') %>
+
+    <h2>Catways</h2>
+
+    <h3>Voici la liste des catways:</h3>
+    <ul>
+        <% catways.forEach(catway=> { %>
+            <li>
+                <a href="/catways/<%= catway._id %>"> Numéro
+                    <%= catway.catwayNumber %>
+                </a>
+            </li>
+            <% }); %>
+    </ul>
+    <h3>Ajouter un catway</h3>
+    <form action="/catways/" method="POST">
+        <input type="hidden" name="_method" value="POST">
+        <label for="catwayNumber">Numéro</label>
+        <input type="number" name="catwayNumber">
+        <label for="type">Type</label>
+        <select name="type" id="type-select">
+            <option value="">Choisissez un type</option>
+            <option value="short">Short</option>
+            <option value="long">Long</option>
+        </select>
+        <label for="catwayState">État</label>
+        <input type="text" name="catwayState">
+        <input type="hidden" name="catway" value="catway">
+        <input type="submit">
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+include layout
+
+h2 Catways
+
+h3 Voici la liste des utilisateurs:
+  ul
+    each user in users
+      li
+        a(href='users/#{user._id}')  #{user.name}
+
+h3 Ajouter un utilisateur
+  form(action='/users/', method='POST')
+    input(type='hidden', name='_method', value='POST')
+    label(for='name') Nom
+    input(type='text', name='name')
+    label(for='email') Email
+    input(type='email', name='email')
+    label(for='password') État
+    input(type='text', name='password')
+    input(type='hidden', name='user', value='user')
+    input(type='submit')

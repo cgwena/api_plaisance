@@ -1,5 +1,9 @@
-extends layout
+include layout
 
-block content
-  h1= title
-  p Welcome to #{title}
+h3 Se connecter
+form(action='/users/auth/', method='POST')
+  p Email
+  input(type='email', name='email')
+  p Mot de passe
+  input(type='password', name='password')
+  input(type='submit')

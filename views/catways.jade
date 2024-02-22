@@ -1,0 +1,26 @@
+include layout
+
+h2 Catways
+
+h3 Voici la liste des catways:
+  
+    each catway in catways
+      a(href='/catways/#{catway._id}') Numéro #{catway.catwayNumber}
+
+h3 Ajouter un catway
+  form(action='/catways/', method='POST')
+    input(type='hidden', name='_method', value='POST')
+    label(for='catwayNumber') Numéro
+    input(type='number', name='catwayNumber')
+    label(for='type') Type
+    select(name='type', id='type-select')
+      option(value='') Choisissez un type
+      option(value='short') Short
+      option(value='long') Long
+    label(for='catwayState') État
+    select(name='catwayState')
+      option(value='') 
+      option(value='libre') Libre
+      option(value='réservé') Réservé
+    input(type='hidden', name='catway', value='catway')
+    input(type='submit')

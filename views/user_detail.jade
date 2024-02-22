@@ -1,0 +1,19 @@
+include layout
+
+h2 Nom #{user.name}
+p Email: #{user.email}
+
+h3 Mettre à jour
+  form(action='/users/auth/users/#{user._id}', method='POST')
+    label(for='name') Nom :
+    input(type='text', name='name', value=user.name)
+    label(for='email') Email :
+    input(type='email', name='email', value=user.email)
+    label(for='password') Mot de passe
+    input(type='text', name='password')
+    input(type='submit')
+
+form(action='/users/auth/users/#{user._id}', method='POST')
+  input(type='hidden', name='_method', value='DELETE')
+  button(type='submit', onclick='return confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ?")') Supprimer
+

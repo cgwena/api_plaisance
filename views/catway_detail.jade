@@ -1,0 +1,44 @@
+include layout
+
+h2 Numéro #{catway.catwayNumber}
+p Type: #{catway.type}
+p État: #{catway.catwayState}
+
+h3 Réserver ce catway 
+p
+  form(action='/catways/#{catway.id}/reservations', method='POST')
+    input(type='hidden', name='_method', value='POST')
+    label(for='catwayNumber') Numéro
+    input(type='number', name='catwayNumber' value=catway.catwayNumber)
+    label(for='clientName') Nom du client 
+    input(type='text', name='clientName')
+    label(for='boatName') Nom du bateau
+    input(type='text', name='boatName')
+    label(for='checkIn') Date d'arrivée
+    input(type='date', name='checkIn')
+    label(for='checkOut') Date de départ
+    input(type='date', name='checkOut')
+    input(type='hidden', name='reservation', value='reservation')
+    input(type='submit')
+
+h3 Mettre à jour
+p 
+  form(action='/catways/#{catway._id}', method='POST')
+    label(for='catwayNumber') Numéro
+    input(type='number', name='catwayNumber', value=catway.catwayNumber)
+    label(for='type') Type
+    select(name='type', id='type-select')
+      option(value='') #{catway.type}
+      option(value='short') Short
+      option(value='long') Long
+    label(for='catwayState') État
+    select(name='type', id='type-select')
+      option(value='') #{catway.catwayState}
+      option(value='libre') Libre
+      option(value='réservé') Réservé
+    input(type='submit')
+
+form(action='/catways/#{catway._id}', method='POST')
+  input(type='hidden', name='_method', value='DELETE')
+  button(type='submit', onclick='return confirm("Êtes-vous sûr de vouloir supprimer ce catway ?")') Supprimer
+

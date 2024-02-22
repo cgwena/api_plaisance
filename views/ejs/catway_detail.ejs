@@ -1,0 +1,30 @@
+<%- include('layout') %>
+    <h2>Numéro <%= catway.catwayNumber %>
+    </h2>
+    <p>Type: <%= catway.type %>
+    </p>
+    <p>État: <%= catway.catwayState %>
+    </p>
+
+    <h3>Mettre à jour</h3>
+    <form action="/catways/update/<%= catway._id %>?_method=PUT" method="POST">
+        <label for="catwayNumber">Numéro</label>
+        <input type="number" name="catwayNumber" value="<%= catway.catwayNumber %>">
+        <label for="type">Type</label>
+        <select name="type" id="type-select">
+            <option value=""><%= catway.type %></option>
+            <option value="short">Short</option>
+            <option value="long">Long</option>
+        </select>
+        <label for="catwayState">État</label>
+        <input type="text" name="catwayState" value="<%= catway.catwayState %>">
+        <input type="submit">
+    </form>
+
+    <h3><form action="/catways/delete/<%= catway._id %>" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit">Supprimer</button>
+    </form></h3>
+</body>
+
+</html>
